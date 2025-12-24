@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Snowman I Call Mine ❄️</title>
+
+  <style>
+    :root{
+      --bg1:#0b0f1a;
+      --bg2:#120a24;
+      --card:#0f172aee;
+      --text:#e8eefc;
+      --muted:#b7c3e6;
+      --gold:#f5c451;
+      --pink:#ff4d8d;
+      --line: rgba(255,255,255,.12);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(1200px 800px at 20% 10%, #2a1a5c55, transparent 60%),
+        radial-gradient(1000px 700px at 80% 0%, #ff4d8d22, transparent 55%),
+        radial-gradient(900px 600px at 50% 90%, #f5c45122, transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: auto;
+      padding: 28px 18px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .btn{
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      font-weight:600;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap:16px;
+    }
+
+    @media(max-width:880px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.75);
+      padding:18px;
+      box-shadow:0 18px 60px rgba(0,0,0,.4);
+    }
+
+    h1{
+      font-size:42px;
+      margin:10px 0;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+
+    .pill{
+      display:inline-block;
+      margin:6px 6px 0 0;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:14px 0;
+    }
+
+    .typebox{
+      white-space:pre-wrap;
+      line-height:1.7;
+      font-size:16px;
+      min-height:200px;
+    }
+
+    .ticket{
+      border:1px dashed rgba(255,255,255,.2);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(0,0,0,.2);
+    }
+
+    .label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--muted);
+    }
+
+    .value{
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:8px;
+    }
+
+    .photos{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .ph{
+      height:120px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(255,255,255,.4);
+      font-size:12px;
+      overflow:hidden;
+    }
+
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    canvas{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:99;
+    }
+  </style>
+</head>
+
+<body>
+  <audio controls src="underneath_the_tree.mp3"></audio>
+
+<canvas id="fx"></canvas>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="chip">🎄 Christmas Release • Only in Your Heart</div>
+    <div>
+      <button class="btn" id="playBtn">✨ Play Trailer</button>
+      <button class="btn" id="confettiBtn">🎉 Make it Rain</button>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="card">
+      <h1>THE SNOWMAN I CALL MINE</h1>
+      <p class="sub">
+        Starring <b>Baby</b> • Co-starring A <br>
+        Genre: Snowfall • Rom-Com • Comfort • Forever
+      </p>
+
+      <div class="pill">⭐ 5/5 — Unreal boyfriend energy</div>
+      <div class="pill">🎬 Director’s Cut: Us</div>
+      <div class="pill">🍿 Runtime: Always</div>
+
+      <div class="divider"></div>
+
+      <div class="typebox" id="letter"></div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <h3>🎟️ Premiere Ticket</h3>
+
+      <div class="ticket">
+        <div class="label">Admit One</div>
+        <div class="value">Winter Premiere: The Snowman I Call Mine</div>
+
+        <div class="label">Seat</div>
+        <div class="value">Right next to me (non-negotiable)</div>
+
+        <div class="label">Valid For</div>
+        <div class="value">Lifetime + all re-releases</div>
+
+        <div class="label">Includes</div>
+        <div class="value">
+          Unlimited hugs • Forehead kisses • Comfort • Love
+        </div>
+
+        <div class="label">Fine Print</div>
+        <div class="value">
+          Once redeemed, you’re mine. No refunds. Only love ❄️
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>📸 Our Highlights</h3>
+      <div class="photos">
+  <div class="ph"><img src="pic1.jpg" alt="Us 1"></div>
+  <div class="ph"><img src="pic2.jpg" alt="Us 2"></div>
+  <div class="ph"><img src="pic3.jpg" alt="Us 3"></div>
+</div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // --- Letter ---
+  const LETTER = `Baby boo… Hey!!! Hiii!!!
+Merry Christmas!! 🎄✨
+
+A festivity of joy, happiness, light, laughter and nothing but all the love in the world.
+You have no idea how terribly I miss you right now, my precious baby.
+
+I wish we were together hand in hand, decorating a space with cute little things, giving it a personality of us.
+Sitting near the window, watching the snow shower, lost in each other’s eyes in each other’s arms.
+Ahmm baby…I love youuu 🤍
+
+You are, undoubtedly, the best gift I received this year—2025.
+A gift I didn’t ask for, but was truly blessed with.
+And now that I have all the access… I ain’t letting it slip out of my hands.
+You’re that soul I’d want to preserve with all of me.
+
+I’m grateful for that reply you shot on my story.
+For us talking.
+For the first time listening to you.
+For the feeling of wanting more.
+
+For the craziness.
+For the music audition and those music conversations.
+For our first meet, the buzz, the awkwardness, that very first awkward hug.
+For the acknowledgment.
+For the thought of a second meet.
+For trying to fix that hug.
+
+For the sleepless nights.
+For the nights I looked forward to.
+For slowing and easing my nights.
+For sacrificing your sleep.
+For listening to all my rants, loose talks, gyan and what not.
+
+For the Bollywood craze.
+For those unbelievable coincidence campus meets especially the day I was coming to Portland.
+For singing with me.
+For bringing me food.
+For boozing with me.
+For making the move.
+
+For always being with me.
+For listening to me.
+For holding me.
+For the comfort.
+For making me feel like home.
+For agreeing to all my crazy-ass thoughts.
+For always trying to come up with a solution.
+For making me a better being.
+
+I don’t think I could ever get enough of you now—
+never… until February 31st arrives, baby.
+
+You are special.
+Trust me—I’m not saying this just because you’re my boyfriend.
+You are genuinely the special one.
+
+I’m glad I found my hetav for life.
+I wish you all the love, light, and wellness—for everything you think, pursue, execute and beyond.
+
+Love,
+A 🤍`;
+
+  document.getElementById("letter").textContent = LETTER;
+
+  // --- Music (same folder as index.html) ---
+  const MUSIC_FILE = "underneath_the_tree.mp3"; // change ONLY if your filename differs
+  const audio = new Audio(MUSIC_FILE);
+  audio.loop = true;
+  audio.volume = 0.35;
+
+  // --- UI helpers ---
+  const playBtn = document.getElementById("playBtn");
+  const rainBtn = document.getElementById("confettiBtn");
+  const titleEl = document.querySelector("h1"); // THE SNOWMAN I CALL MINE
+
+  function pulseTitle(){
+    // tiny “trailer spotlight” effect
+    if (!titleEl || !titleEl.animate) return;
+    titleEl.animate(
+      [
+        { transform: "scale(1)", filter: "drop-shadow(0 0 0 rgba(245,196,81,0))" },
+        { transform: "scale(1.03)", filter: "drop-shadow(0 18px 28px rgba(245,196,81,.35))" },
+        { transform: "scale(1)", filter: "drop-shadow(0 0 0 rgba(245,196,81,0))" }
+      ],
+      { duration: 900, easing: "cubic-bezier(.2,.8,.2,1)" }
+    );
+  }
+
+  // --- Confetti (better than blocks: animated shower) ---
+  const canvas = document.getElementById("fx");
+  const ctx = canvas.getContext("2d");
+  let W, H;
+
+  function resizeCanvas(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  let pieces = [];
+  let animating = false;
+
+  function addConfetti(count, originX = W * 0.5, originY = H * 0.15, spreadX = 180, spreadY = 50){
+    const palette = ["#f5c451","#ff4d8d","#ffffff"];
+    for(let i=0;i<count;i++){
+      pieces.push({
+        x: originX + (Math.random() * spreadX - spreadX/2),
+        y: originY + (Math.random() * spreadY - spreadY/2),
+        vx: (Math.random() * 6 - 3),
+        vy: (Math.random() * 3 + 2),
+        g: 0.10 + Math.random() * 0.08,
+        s: 5 + Math.random() * 7,
+        r: Math.random() * Math.PI * 2,
+        vr: (Math.random() * 0.25 - 0.125),
+        a: 1,
+        c: palette[Math.floor(Math.random() * palette.length)]
+      });
+    }
+    if(!animating) animate();
+  }
+
+  function animate(){
+    animating = true;
+    ctx.clearRect(0,0,W,H);
+
+    pieces = pieces.filter(p => p.a > 0.03 && p.y < H + 60);
+    for(const p of pieces){
+      p.vy += p.g;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r += p.vr;
+      p.a *= 0.992;
+
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.r);
+      ctx.globalAlpha = p.a;
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.6);
+      ctx.restore();
+    }
+
+    if(pieces.length){
+      requestAnimationFrame(animate);
+    } else {
+      animating = false;
+      ctx.clearRect(0,0,W,H);
+    }
+  }
+
+  // --- Button behaviors ---
+  playBtn.onclick = async () => {
+    // “Trailer”: pulse + quick burst + toggle audio
+    pulseTitle();
+    addConfetti(140, W*0.5, H*0.18, 220, 40);
+
+    try{
+      if(audio.paused){
+        await audio.play(); // must be on click
+        playBtn.textContent = "⏸ Pause Trailer";
+        playBtn.setAttribute("aria-pressed","true");
+      } else {
+        audio.pause();
+        playBtn.textContent = "✨ Play Trailer";
+        playBtn.setAttribute("aria-pressed","false");
+      }
+    } catch(e){
+      alert("Music didn’t load 😭 Check your mp3 filename matches MUSIC_FILE exactly.");
+      console.error(e);
+    }
+  };
+
+  rainBtn.onclick = () => {
+    // “Make it Rain”: bigger + longer shower from the top
+    addConfetti(520, W*0.5, -10, W, 10); // wide shower
+    // add a second wave for drama
+    setTimeout(() => addConfetti(420, W*0.5, -10, W, 10), 220);
+  };
+
+  // tiny sparkle on load
+  setTimeout(() => addConfetti(90, W*0.5, H*0.18, 160, 30), 450);
+</script>
